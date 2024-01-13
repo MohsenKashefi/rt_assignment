@@ -31,7 +31,7 @@ The repository includes three main components:
 
     ```bash
     git clone https://github.com/MohsenKashefi/rt_second_assignment.git
-    ```.
+    ```
 
 ## Usage
 
