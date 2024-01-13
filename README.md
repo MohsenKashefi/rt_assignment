@@ -8,8 +8,8 @@ This repository contains ROS (Robot Operating System) nodes and services for nav
 2. [Dependencies](#dependencies)
 3. [Installation](#installation)
 4. [Usage](#usage)
-5. [Code Structure](#code-structure)
-6. [Additional Information](#additional-information)
+5. [Pseudocode](#Pseudocode)
+
 
 ## Overview
 
@@ -35,12 +35,9 @@ The repository includes three main components:
 
 ## Usage
 
-# set_target_client.py
-
-# Initialize ROS node
+# node a Pseudocode
 initialize ROS node
 
-# Initialize publishers, subscribers, and action client
 initialize publishers, subscribers, and action client
 
 # Main loop
