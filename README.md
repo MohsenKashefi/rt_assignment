@@ -19,6 +19,29 @@ The repository includes three main components:
 2. **node_b**: Provides a service to retrieve information about the last desired x and y positions.
 3. **node_c**: Calculates and provides information about the distance and average velocity.
 
+## Key Features
+
+### 1. node_a
+
+- **Goal Setting:** Users can interactively set new navigation goals by specifying target coordinates, triggering the robot's navigation planning.
+  
+- **Goal Cancellation:** Users have the ability to cancel an ongoing navigation goal, providing flexibility in robot control.
+
+- **Integration with Actionlib:** The script seamlessly integrates with ROS actionlib, allowing for efficient, goal-driven behavior.
+
+### 2. node_b
+
+- **Information Retrieval:** This service allows users to query and obtain information about the last set desired x and y positions, offering insights into recent navigation goals.
+
+- **Parameter-based Storage:** The last desired positions are stored in ROS parameters for easy retrieval.
+
+### 3. node_c
+
+- **Distance Calculation:** The script calculates the distance between the desired and actual robot positions, providing valuable information about navigation progress.
+
+- **Average Velocity:** Information on the average velocity, computed over a specified window size, offers insights into the robot's movement dynamics.
+
+
 ## Dependencies
 
 - ROS (Melodic or later)
