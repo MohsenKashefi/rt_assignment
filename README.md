@@ -5,11 +5,10 @@ This repository contains ROS (Robot Operating System) nodes and services for nav
 ## Contents
 
 1. [Overview](#overview)
-2. [Key Features](#Key Features)
-3. [Dependencies](#dependencies)
-4. [Installation](#installation)
-5. [Usage](#usage)
-6. [Pseudocode](#Pseudocode)
+2. [Dependencies](#dependencies)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Pseudocode](#Pseudocode)
 
 
 ## Overview
@@ -85,27 +84,5 @@ while not ROS shutdown:
         # Cancel current goal if exists
         cancel_current_goal()
 
-# Function to get new goal coordinates from the user
-function get_user_input(prompt):
-    display prompt to user
-    wait for user input
-    return user_input
-
-# Function to create a new PlanningGoal message
-function create_planning_goal(coordinates):
-    create a new PlanningGoal message
-    set the target pose with provided coordinates
-    return the PlanningGoal message
-
-# Function to send a new goal to the action server
-function send_goal_to_action_server(goal):
-    send the provided goal to the Planning action server
-
-# Function to cancel the current goal
-function cancel_current_goal():
-    check if there is an active goal
-    if active goal exists:
-        cancel the active goal
-        log information about goal cancellation
 
 
