@@ -5,10 +5,11 @@ This repository contains ROS (Robot Operating System) nodes and services for nav
 ## Contents
 
 1. [Overview](#overview)
-2. [Dependencies](#dependencies)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Pseudocode](#Pseudocode)
+2. [Key Features](#Key Features)
+3. [Dependencies](#dependencies)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [Pseudocode](#Pseudocode)
 
 
 ## Overview
@@ -56,10 +57,13 @@ The repository includes three main components:
     git clone https://github.com/MohsenKashefi/rt_second_assignment.git
     ```
 
-# node a Pseudocode
+# set_target_client.py
+
+# Initialize ROS node
 initialize ROS node
 
-initialize publishers, subscribers, and action client
+# Initialize publishers, subscribers, and action client
+initialize Pose publisher, Twist publisher, Odometry subscriber, and Planning action client
 
 # Main loop
 while not ROS shutdown:
@@ -69,12 +73,39 @@ while not ROS shutdown:
     # Check user input
     if input is 'd':
         # Get new goal coordinates from user
-        get new goal coordinates from user
+        new_goal_coordinates = get_user_input("Enter new goal coordinates (x, y): ")
+        
+        # Create a new PlanningGoal message
+        new_goal = create_planning_goal(new_goal_coordinates)
 
-        # Create and send new goal to action server
-        create and send new goal to action server
+        # Send new goal to action server
+        send_goal_to_action_server(new_goal)
 
     elif input is 'q':
         # Cancel current goal if exists
-        cancel current goal if exists
+        cancel_current_goal()
+
+# Function to get new goal coordinates from the user
+function get_user_input(prompt):
+    display prompt to user
+    wait for user input
+    return user_input
+
+# Function to create a new PlanningGoal message
+function create_planning_goal(coordinates):
+    create a new PlanningGoal message
+    set the target pose with provided coordinates
+    return the PlanningGoal message
+
+# Function to send a new goal to the action server
+function send_goal_to_action_server(goal):
+    send the provided goal to the Planning action server
+
+# Function to cancel the current goal
+function cancel_current_goal():
+    check if there is an active goal
+    if active goal exists:
+        cancel the active goal
+        log information about goal cancellation
+
 
