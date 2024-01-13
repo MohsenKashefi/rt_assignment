@@ -56,12 +56,9 @@ The repository includes three main components:
     git clone https://github.com/MohsenKashefi/rt_second_assignment.git
     ```
 
-# set_target_client.py
+# node_a Pseudocode
 
-# Initialize ROS node
 initialize ROS node
-
-# Initialize publishers, subscribers, and action client
 initialize Pose publisher, Twist publisher, Odometry subscriber, and Planning action client
 
 # Main loop
