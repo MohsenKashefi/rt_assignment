@@ -33,8 +33,6 @@ The repository includes three main components:
     git clone https://github.com/MohsenKashefi/rt_second_assignment.git
     ```
 
-## Usage
-
 # node a Pseudocode
 initialize ROS node
 
