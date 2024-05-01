@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 
+"""
+.. module:: rt_assignment2
+   :platform: Unix
+   :synopsis: Python module for the node_a
+.. moduleauthor:: Mohsen Kashefi
+
+This code implements a the node_a.
+
+Subscriber:
+    - /node_a/pose: Subscribes to the pose.
+"""
+
 import rospy
 from geometry_msgs.msg import Point, Pose, Twist
 from nav_msgs.msg import Odometry
@@ -11,6 +23,14 @@ from actionlib_msgs.msg import GoalStatus
 import threading
 
 def publish_position_and_velocity(msg, pos_vel_publisher):
+    """
+    Publishes the current position and velocity information.
+
+    :param msg: Odometry message containing position and velocity information.
+    :type msg: nav_msgs.msg.Odometry
+    :param pos_vel_publisher: Publisher for position and velocity information.
+    :type pos_vel_publisher: rospy.Publisher
+    """
     current_pos = msg.pose.pose.position
     current_vel_linear = msg.twist.twist.linear
     current_vel_angular = msg.twist.twist.angular
@@ -24,6 +44,14 @@ def publish_position_and_velocity(msg, pos_vel_publisher):
     pos_vel_publisher.publish(pos_and_vel)
 
 def get_user_input(prompt):
+    """
+    Retrieves user input with a prompt.
+
+    :param prompt: Prompt to display to the user.
+    :type prompt: str
+    :return: User input
+    :rtype: str
+    """
     user_input = None
     input_lock = threading.Lock()
 
@@ -40,6 +68,12 @@ def get_user_input(prompt):
         return user_input
 
 def get_new_goal():
+    """
+    Retrieves a new goal from user input.
+
+    :return: New goal and its coordinates
+    :rtype: tuple(assignment_2_2023.msg.PlanningGoal, tuple(float, float))
+    """
     try:
         input_x = float(input("x: "))
         input_y = float(input("y: "))
@@ -57,6 +91,9 @@ def get_new_goal():
     return goal, (input_x, input_y)
 
 def handle_goal_commands():
+    """
+    Handles goal commands from the user.
+    """
     rospy.init_node('set_target_client')
 
     pos_vel_publisher = rospy.Publisher("/pos_vel", Vel, queue_size=1)
@@ -98,8 +135,67 @@ def handle_goal_commands():
         rospy.sleep(1)  # To prevent the loop from consuming too much CPU time
 
 def main():
+    """
+    Main function to run the goal handler.
+    """
     handle_goal_commands()
 
 if __name__ == '__main__':
     main()
 
+# !/usr/bin/env python3
+
+# import rospy
+# import threading
+# from std_msgs.msg import String
+# from ipywidgets import widgets, interact
+
+# # Define ROS node and publisher
+# rospy.init_node('user_interface')  # Initialize only once
+# publisher = rospy.Publisher('/user_commands', String, queue_size=10)
+
+# # Define callback function for sending commands
+# def send_command(command):
+#     publisher.publish(command)
+
+# # Define UI elements
+# command_dropdown = widgets.Dropdown(
+#     options=['Define New Goal (d)', 'Cancel Goal (q)'],
+#     description='Command:'
+# )
+
+# x_input = widgets.FloatText(
+#     description='X:'
+# )
+
+# y_input = widgets.FloatText(
+#     description='Y:'
+# )
+
+# submit_button = widgets.Button(
+#     description='Submit'
+# )
+
+# # Define callback function for submit button click
+# def on_submit_clicked(b):
+#     command = command_dropdown.value[0]
+#     if command == 'd':
+#         x = x_input.value
+#         y = y_input.value
+#         send_command(f'd {x} {y}')
+#     elif command == 'q':
+#         send_command('q')
+
+# submit_button.on_click(on_submit_clicked)
+
+# # Display UI
+# display(command_dropdown, x_input, y_input, submit_button)
+
+# # ROS subscriber
+# def handle_user_commands(data):
+#     rospy.loginfo(f"Received command: {data.data}")
+
+# subscriber = rospy.Subscriber('/user_commands', String, handle_user_commands)
+
+# # Spin ROS
+# rospy.spin()

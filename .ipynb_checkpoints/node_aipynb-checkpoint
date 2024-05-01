@@ -1,0 +1,160 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0a007e51-1dca-4af9-aec1-226f8df73ff2",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2024-04-21T00:39:20.303924Z",
+     "iopub.status.busy": "2024-04-21T00:39:20.303459Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "f06bfcb088c949b1b5dd3a293223dbbe",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Dropdown(description='Command:', options=('Define New Goal (d)', 'Cancel Goal (q)'), value='Define New Goal (d…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "4145c83b70794c74ad9610e160359afa",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "FloatText(value=0.0, description='X:')"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "b040819b3ad64cadb91ff8c1ab477dc2",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "FloatText(value=0.0, description='Y:')"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "f415a238b9624d9ea9c945a4a3455771",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Button(description='Submit', style=ButtonStyle())"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "#!/usr/bin/env python3\n",
+    "\n",
+    "import rospy\n",
+    "import threading\n",
+    "from std_msgs.msg import String\n",
+    "from ipywidgets import widgets, interact\n",
+    "\n",
+    "# Define ROS node and publisher\n",
+    "rospy.init_node('user_interface')  # Initialize only once\n",
+    "publisher = rospy.Publisher('/user_commands', String, queue_size=10)\n",
+    "\n",
+    "# Define callback function for sending commands\n",
+    "def send_command(command):\n",
+    "    publisher.publish(command)\n",
+    "\n",
+    "# Define UI elements\n",
+    "command_dropdown = widgets.Dropdown(\n",
+    "    options=['Define New Goal (d)', 'Cancel Goal (q)'],\n",
+    "    description='Command:'\n",
+    ")\n",
+    "\n",
+    "x_input = widgets.FloatText(\n",
+    "    description='X:'\n",
+    ")\n",
+    "\n",
+    "y_input = widgets.FloatText(\n",
+    "    description='Y:'\n",
+    ")\n",
+    "\n",
+    "submit_button = widgets.Button(\n",
+    "    description='Submit'\n",
+    ")\n",
+    "\n",
+    "# Define callback function for submit button click\n",
+    "def on_submit_clicked(b):\n",
+    "    command = command_dropdown.value[0]\n",
+    "    if command == 'd':\n",
+    "        x = x_input.value\n",
+    "        y = y_input.value\n",
+    "        send_command(f'd {x} {y}')\n",
+    "    elif command == 'q':\n",
+    "        send_command('q')\n",
+    "\n",
+    "submit_button.on_click(on_submit_clicked)\n",
+    "\n",
+    "# Display UI\n",
+    "display(command_dropdown, x_input, y_input, submit_button)\n",
+    "\n",
+    "# ROS subscriber\n",
+    "def handle_user_commands(data):\n",
+    "    rospy.loginfo(f\"Received command: {data.data}\")\n",
+    "\n",
+    "subscriber = rospy.Subscriber('/user_commands', String, handle_user_commands)\n",
+    "\n",
+    "# Spin ROS\n",
+    "rospy.spin()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0eb9fec9-1364-4fcc-b03e-71e6c702a5cb",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.10"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

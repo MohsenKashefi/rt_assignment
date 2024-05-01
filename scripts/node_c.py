@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
 
+
+"""
+.. module:: info_service_node
+   :platform: Unix
+   :synopsis: Python module for the info_service node.
+.. moduleauthor:: Mohsen Kashefi
+
+This code implements the info_service node.
+
+Subscribers:
+    - /pos_vel: Subscribes to the position and velocity information.
+
+Services:
+    - info_service: Provides information about distance and average velocity.
+
+"""
+
 import rospy
 import math
 from assignment_2_2023.msg import Vel
@@ -10,6 +27,12 @@ average_vel_x = 0
 distance = 0
 
 def get_distance_and_average_velocity(msg):
+    """
+    Callback function to compute distance and average velocity.
+
+    :param msg: Velocity message containing position and velocity information.
+    :type msg: assignment_2_2023.msg.Vel
+    """
     global distance
     global average_vel_x
 
@@ -38,6 +61,14 @@ def get_distance_and_average_velocity(msg):
     average_vel_x = sum(vel_data) / min(len(vel_data), velocity_window_size)
 
 def get_values(_):
+    """
+    Service handler function to provide distance and average velocity.
+
+    :param _: Empty request, as no input is required.
+    :type _: No input type.
+    :return: Response containing distance and average velocity.
+    :rtype: assignment_2_2023.srv.Ave_pos_velResponse
+    """
     global distance
     global average_vel_x
 
@@ -48,6 +79,9 @@ def get_values(_):
     return Ave_pos_velResponse(distance, average_vel_x)
 
 def main():
+    """
+    Main function to initialize the ROS node and set up subscribers and services.
+    """
     # Initialize the node with the name 'info_service'
     rospy.init_node('info_service')
     rospy.loginfo("Info service node initialized")
