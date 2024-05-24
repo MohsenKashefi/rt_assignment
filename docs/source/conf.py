@@ -6,7 +6,7 @@
 import os
 import subprocess
 import sys
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('../../'))
 show_authors = True
 
 # -- Project information -----------------------------------------------------
@@ -35,12 +35,13 @@ extensions = [
 'breathe'
 ]
 
+templates_path = ['_templates']
+exclude_patterns = []
 
 source_suffix = '.rst'
 master_doc = 'index'
 html_theme = 'sphinx_rtd_theme'
-templates_path = ['_templates']
-exclude_patterns = []
+
 
 
 
@@ -48,17 +49,6 @@ exclude_patterns = []
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'alabaster'
-html_static_path = ['_static']
 
-# -- Options for intersphinx extension ---------------------------------------
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
-# -- Options for todo extension ----------------------------------------------
-# If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = True
-# -- Options for breathe
-breathe_projects = {
-"rt_second_assignment": "../docs/build/xml/"
-}
-breathe_default_project = "rt_second_assignment"
-breathe_default_members = ('members', 'undoc-members')
+
+

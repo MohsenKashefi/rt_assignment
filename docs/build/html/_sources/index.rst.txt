@@ -20,15 +20,39 @@ Indices and tables
 * :ref:`search`
 
 
-rt_assignmetn2 documentation!
+node_a!
 **************************************
 This is the documentation of the rt_assingnemnt2 package!
 rt_assignmrnt2 Module
 ===========================
 
 .. automodule:: scripts.node_a
-:members:
-node_a
-================
-.. automodule:: scripts.node_a
-:members:
+  :members:
+
+.. _scripts.node_b:
+
+node_b
+===========================
+
+This package contains a Python script for providing a service to retrieve the last desired x and y positions.
+
+.. module:: scripts.node_b
+
+.. automodule:: scripts.node_b
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   
+.. _scripts.node_c:
+
+node_c
+===========================
+
+This package contains a Python script for the info_service node..
+
+.. module:: scripts.node_c
+
+.. automodule:: scripts.node_c
+   :members:
+   :undoc-members:
+   :show-inheritance:
