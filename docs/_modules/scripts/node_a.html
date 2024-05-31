@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scripts.node_a &#8212; rt_assignment2 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=0868e8a2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=404a92a0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for scripts.node_a</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: rt_assignment2</span>
+<span class="sd">   :platform: Unix</span>
+<span class="sd">   :synopsis: Python module for the node_a</span>
+<span class="sd">.. moduleauthor:: Mohsen Kashefi</span>
+
+<span class="sd">This code implements a the node_a.</span>
+
+<span class="sd">Subscriber:</span>
+<span class="sd">    - /node_a/pose: Subscribes to the pose.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">from</span> <span class="nn">geometry_msgs.msg</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Pose</span><span class="p">,</span> <span class="n">Twist</span>
+<span class="kn">from</span> <span class="nn">nav_msgs.msg</span> <span class="kn">import</span> <span class="n">Odometry</span>
+<span class="kn">import</span> <span class="nn">actionlib</span>
+<span class="kn">from</span> <span class="nn">assignment_2_2023.msg</span> <span class="kn">import</span> <span class="n">Vel</span>
+<span class="kn">from</span> <span class="nn">assignment_2_2023.msg</span> <span class="kn">import</span> <span class="n">PlanningAction</span><span class="p">,</span> <span class="n">PlanningGoal</span>
+<span class="kn">from</span> <span class="nn">std_srvs.srv</span> <span class="kn">import</span> <span class="n">SetBool</span>
+<span class="kn">from</span> <span class="nn">actionlib_msgs.msg</span> <span class="kn">import</span> <span class="n">GoalStatus</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<div class="viewcode-block" id="publish_position_and_velocity"><a class="viewcode-back" href="../../index.html#scripts.node_a.publish_position_and_velocity">[docs]</a><span class="k">def</span> <span class="nf">publish_position_and_velocity</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pos_vel_publisher</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Publishes the current position and velocity information.</span>
+
+<span class="sd">    :param msg: Odometry message containing position and velocity information.</span>
+<span class="sd">    :type msg: nav_msgs.msg.Odometry</span>
+<span class="sd">    :param pos_vel_publisher: Publisher for position and velocity information.</span>
+<span class="sd">    :type pos_vel_publisher: rospy.Publisher</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">current_pos</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span>
+    <span class="n">current_vel_linear</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">twist</span><span class="o">.</span><span class="n">twist</span><span class="o">.</span><span class="n">linear</span>
+    <span class="n">current_vel_angular</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">twist</span><span class="o">.</span><span class="n">twist</span><span class="o">.</span><span class="n">angular</span>
+
+    <span class="n">pos_and_vel</span> <span class="o">=</span> <span class="n">Vel</span><span class="p">()</span>
+    <span class="n">pos_and_vel</span><span class="o">.</span><span class="n">pos_x</span> <span class="o">=</span> <span class="n">current_pos</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">pos_and_vel</span><span class="o">.</span><span class="n">pos_y</span> <span class="o">=</span> <span class="n">current_pos</span><span class="o">.</span><span class="n">y</span>
+    <span class="n">pos_and_vel</span><span class="o">.</span><span class="n">vel_x</span> <span class="o">=</span> <span class="n">current_vel_linear</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">pos_and_vel</span><span class="o">.</span><span class="n">vel_z</span> <span class="o">=</span> <span class="n">current_vel_angular</span><span class="o">.</span><span class="n">z</span>
+
+    <span class="n">pos_vel_publisher</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">pos_and_vel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="get_user_input"><a class="viewcode-back" href="../../index.html#scripts.node_a.get_user_input">[docs]</a><span class="k">def</span> <span class="nf">get_user_input</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves user input with a prompt.</span>
+
+<span class="sd">    :param prompt: Prompt to display to the user.</span>
+<span class="sd">    :type prompt: str</span>
+<span class="sd">    :return: User input</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">input_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">input_thread</span><span class="p">():</span>
+        <span class="k">nonlocal</span> <span class="n">user_input</span>
+        <span class="k">with</span> <span class="n">input_lock</span><span class="p">:</span>
+            <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+    <span class="n">input_handler</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">input_thread</span><span class="p">)</span>
+    <span class="n">input_handler</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">input_handler</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Timeout to avoid blocking forever</span>
+
+    <span class="k">with</span> <span class="n">input_lock</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">user_input</span></div>
+
+<div class="viewcode-block" id="get_new_goal"><a class="viewcode-back" href="../../index.html#scripts.node_a.get_new_goal">[docs]</a><span class="k">def</span> <span class="nf">get_new_goal</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves a new goal from user input.</span>
+
+<span class="sd">    :return: New goal and its coordinates</span>
+<span class="sd">    :rtype: tuple(assignment_2_2023.msg.PlanningGoal, tuple(float, float))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">input_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;x: &quot;</span><span class="p">))</span>
+        <span class="n">input_y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;y: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span><span class="p">(</span><span class="s2">&quot;Invalid input. Please enter a valid number.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">set_param</span><span class="p">(</span><span class="s1">&#39;/des_pos_x&#39;</span><span class="p">,</span> <span class="n">input_x</span><span class="p">)</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">set_param</span><span class="p">(</span><span class="s1">&#39;/des_pos_y&#39;</span><span class="p">,</span> <span class="n">input_y</span><span class="p">)</span>
+
+    <span class="n">goal</span> <span class="o">=</span> <span class="n">PlanningGoal</span><span class="p">()</span>
+    <span class="n">goal</span><span class="o">.</span><span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">input_x</span>
+    <span class="n">goal</span><span class="o">.</span><span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">input_y</span>
+
+    <span class="k">return</span> <span class="n">goal</span><span class="p">,</span> <span class="p">(</span><span class="n">input_x</span><span class="p">,</span> <span class="n">input_y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="handle_goal_commands"><a class="viewcode-back" href="../../index.html#scripts.node_a.handle_goal_commands">[docs]</a><span class="k">def</span> <span class="nf">handle_goal_commands</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handles goal commands from the user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;set_target_client&#39;</span><span class="p">)</span>
+
+    <span class="n">pos_vel_publisher</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Publisher</span><span class="p">(</span><span class="s2">&quot;/pos_vel&quot;</span><span class="p">,</span> <span class="n">Vel</span><span class="p">,</span> <span class="n">queue_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">action_client</span> <span class="o">=</span> <span class="n">actionlib</span><span class="o">.</span><span class="n">SimpleActionClient</span><span class="p">(</span><span class="s1">&#39;/reaching_goal&#39;</span><span class="p">,</span> <span class="n">PlanningAction</span><span class="p">)</span>
+    <span class="n">action_client</span><span class="o">.</span><span class="n">wait_for_server</span><span class="p">()</span>
+
+    <span class="n">goal_cancelled</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Setup subscriber outside the loop</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s2">&quot;/odom&quot;</span><span class="p">,</span> <span class="n">Odometry</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">msg</span><span class="p">:</span> <span class="n">publish_position_and_velocity</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pos_vel_publisher</span><span class="p">))</span>
+
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">get_user_input</span><span class="p">(</span><span class="s2">&quot;If you want to define a new goal, press &#39;d&#39;. If you want to cancel the goal, press &#39;q&#39;: &quot;</span><span class="p">)</span>
+
+        <span class="n">target_pos_x</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;/des_pos_x&#39;</span><span class="p">)</span>
+        <span class="n">target_pos_y</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;/des_pos_y&#39;</span><span class="p">)</span>
+
+        <span class="n">current_goal</span> <span class="o">=</span> <span class="n">PlanningGoal</span><span class="p">()</span>
+        <span class="n">current_goal</span><span class="o">.</span><span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">target_pos_x</span>
+        <span class="n">current_goal</span><span class="o">.</span><span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">target_pos_y</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Current goal: target_x = </span><span class="si">%f</span><span class="s2">, target_y = </span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">target_pos_x</span><span class="p">,</span> <span class="n">target_pos_y</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
+            <span class="n">new_goal</span><span class="p">,</span> <span class="n">new_goal_coords</span> <span class="o">=</span> <span class="n">get_new_goal</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">new_goal</span><span class="p">:</span>
+                <span class="n">action_client</span><span class="o">.</span><span class="n">send_goal</span><span class="p">(</span><span class="n">new_goal</span><span class="p">)</span>
+                <span class="n">goal_cancelled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">goal_cancelled</span><span class="p">:</span>
+                <span class="n">goal_cancelled</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">action_client</span><span class="o">.</span><span class="n">cancel_goal</span><span class="p">()</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Current goal has been cancelled&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;No active goal to cancel&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span><span class="p">(</span><span class="s2">&quot;This is an incorrect command. Please choose between &#39;d&#39; and &#39;q&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Last received goal: target_x = </span><span class="si">%f</span><span class="s2">, target_y = </span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">current_goal</span><span class="o">.</span><span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">current_goal</span><span class="o">.</span><span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># To prevent the loop from consuming too much CPU time</span></div>
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../index.html#scripts.node_a.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function to run the goal handler.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">handle_goal_commands</span><span class="p">()</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># !/usr/bin/env python3</span>
+
+<span class="c1"># import rospy</span>
+<span class="c1"># import threading</span>
+<span class="c1"># from std_msgs.msg import String</span>
+<span class="c1"># from ipywidgets import widgets, interact</span>
+
+<span class="c1"># # Define ROS node and publisher</span>
+<span class="c1"># rospy.init_node(&#39;user_interface&#39;)  # Initialize only once</span>
+<span class="c1"># publisher = rospy.Publisher(&#39;/user_commands&#39;, String, queue_size=10)</span>
+
+<span class="c1"># # Define callback function for sending commands</span>
+<span class="c1"># def send_command(command):</span>
+<span class="c1">#     publisher.publish(command)</span>
+
+<span class="c1"># # Define UI elements</span>
+<span class="c1"># command_dropdown = widgets.Dropdown(</span>
+<span class="c1">#     options=[&#39;Define New Goal (d)&#39;, &#39;Cancel Goal (q)&#39;],</span>
+<span class="c1">#     description=&#39;Command:&#39;</span>
+<span class="c1"># )</span>
+
+<span class="c1"># x_input = widgets.FloatText(</span>
+<span class="c1">#     description=&#39;X:&#39;</span>
+<span class="c1"># )</span>
+
+<span class="c1"># y_input = widgets.FloatText(</span>
+<span class="c1">#     description=&#39;Y:&#39;</span>
+<span class="c1"># )</span>
+
+<span class="c1"># submit_button = widgets.Button(</span>
+<span class="c1">#     description=&#39;Submit&#39;</span>
+<span class="c1"># )</span>
+
+<span class="c1"># # Define callback function for submit button click</span>
+<span class="c1"># def on_submit_clicked(b):</span>
+<span class="c1">#     command = command_dropdown.value[0]</span>
+<span class="c1">#     if command == &#39;d&#39;:</span>
+<span class="c1">#         x = x_input.value</span>
+<span class="c1">#         y = y_input.value</span>
+<span class="c1">#         send_command(f&#39;d {x} {y}&#39;)</span>
+<span class="c1">#     elif command == &#39;q&#39;:</span>
+<span class="c1">#         send_command(&#39;q&#39;)</span>
+
+<span class="c1"># submit_button.on_click(on_submit_clicked)</span>
+
+<span class="c1"># # Display UI</span>
+<span class="c1"># display(command_dropdown, x_input, y_input, submit_button)</span>
+
+<span class="c1"># # ROS subscriber</span>
+<span class="c1"># def handle_user_commands(data):</span>
+<span class="c1">#     rospy.loginfo(f&quot;Received command: {data.data}&quot;)</span>
+
+<span class="c1"># subscriber = rospy.Subscriber(&#39;/user_commands&#39;, String, handle_user_commands)</span>
+
+<span class="c1"># # Spin ROS</span>
+<span class="c1"># rospy.spin()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">rt_assignment2</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Mohsen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
