@@ -1,31 +1,73 @@
 <!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scripts.node_a &mdash; rt_assignment2 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>scripts.node_a &#8212; rt_assignment2 1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=0868e8a2" />
-    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=404a92a0"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=404a92a0"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-   
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            rt_assignment2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">rt_assignment2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">scripts.node_a</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <h1>Source code for scripts.node_a</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 
@@ -35,10 +77,14 @@
 <span class="sd">   :synopsis: Python module for the node_a</span>
 <span class="sd">.. moduleauthor:: Mohsen Kashefi</span>
 
-<span class="sd">This code implements a the node_a.</span>
+<span class="sd">This code implements node_a which handles goal setting and cancellation for a robot using ROS (Robot Operating System).</span>
 
-<span class="sd">Subscriber:</span>
-<span class="sd">    - /node_a/pose: Subscribes to the pose.</span>
+<span class="sd">Subscribers:</span>
+<span class="sd">    - /odom: Subscribes to the odometry information.</span>
+<span class="sd">Publishers:</span>
+<span class="sd">    - /pos_vel: Publishes the current position and velocity information.</span>
+<span class="sd">Actions:</span>
+<span class="sd">    - /reaching_goal: Sends goals to the action server to reach a specified position.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">rospy</span>
@@ -172,114 +218,34 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 
-<span class="c1"># !/usr/bin/env python3</span>
 
-<span class="c1"># import rospy</span>
-<span class="c1"># import threading</span>
-<span class="c1"># from std_msgs.msg import String</span>
-<span class="c1"># from ipywidgets import widgets, interact</span>
-
-<span class="c1"># # Define ROS node and publisher</span>
-<span class="c1"># rospy.init_node(&#39;user_interface&#39;)  # Initialize only once</span>
-<span class="c1"># publisher = rospy.Publisher(&#39;/user_commands&#39;, String, queue_size=10)</span>
-
-<span class="c1"># # Define callback function for sending commands</span>
-<span class="c1"># def send_command(command):</span>
-<span class="c1">#     publisher.publish(command)</span>
-
-<span class="c1"># # Define UI elements</span>
-<span class="c1"># command_dropdown = widgets.Dropdown(</span>
-<span class="c1">#     options=[&#39;Define New Goal (d)&#39;, &#39;Cancel Goal (q)&#39;],</span>
-<span class="c1">#     description=&#39;Command:&#39;</span>
-<span class="c1"># )</span>
-
-<span class="c1"># x_input = widgets.FloatText(</span>
-<span class="c1">#     description=&#39;X:&#39;</span>
-<span class="c1"># )</span>
-
-<span class="c1"># y_input = widgets.FloatText(</span>
-<span class="c1">#     description=&#39;Y:&#39;</span>
-<span class="c1"># )</span>
-
-<span class="c1"># submit_button = widgets.Button(</span>
-<span class="c1">#     description=&#39;Submit&#39;</span>
-<span class="c1"># )</span>
-
-<span class="c1"># # Define callback function for submit button click</span>
-<span class="c1"># def on_submit_clicked(b):</span>
-<span class="c1">#     command = command_dropdown.value[0]</span>
-<span class="c1">#     if command == &#39;d&#39;:</span>
-<span class="c1">#         x = x_input.value</span>
-<span class="c1">#         y = y_input.value</span>
-<span class="c1">#         send_command(f&#39;d {x} {y}&#39;)</span>
-<span class="c1">#     elif command == &#39;q&#39;:</span>
-<span class="c1">#         send_command(&#39;q&#39;)</span>
-
-<span class="c1"># submit_button.on_click(on_submit_clicked)</span>
-
-<span class="c1"># # Display UI</span>
-<span class="c1"># display(command_dropdown, x_input, y_input, submit_button)</span>
-
-<span class="c1"># # ROS subscriber</span>
-<span class="c1"># def handle_user_commands(data):</span>
-<span class="c1">#     rospy.loginfo(f&quot;Received command: {data.data}&quot;)</span>
-
-<span class="c1"># subscriber = rospy.Subscriber(&#39;/user_commands&#39;, String, handle_user_commands)</span>
-
-<span class="c1"># # Spin ROS</span>
-<span class="c1"># rospy.spin()</span>
 </pre></div>
 
+           </div>
           </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mohsen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../index.html">rt_assignment2</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2024, Mohsen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

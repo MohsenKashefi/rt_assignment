@@ -47,12 +47,24 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">Welcome to rt_assignment2’s documentation!</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a><ul>
-<li><a class="reference internal" href="#node-a">node_a!</a><ul>
+<li><a class="reference internal" href="#node-a">node_a</a><ul>
+<li><a class="reference internal" href="#subscribers">Subscribers</a></li>
+<li><a class="reference internal" href="#publishers">Publishers</a></li>
+<li><a class="reference internal" href="#actions">Actions</a><ul>
+<li><a class="reference internal" href="#publish-position-and-velocity">publish_position_and_velocity</a></li>
+<li><a class="reference internal" href="#get-user-input">get_user_input</a></li>
+<li><a class="reference internal" href="#get-new-goal">get_new_goal</a></li>
+<li><a class="reference internal" href="#handle-goal-commands">handle_goal_commands</a></li>
+<li><a class="reference internal" href="#main">main</a><ul>
 <li><a class="reference internal" href="#scripts.node_a.get_new_goal"><code class="docutils literal notranslate"><span class="pre">get_new_goal()</span></code></a></li>
 <li><a class="reference internal" href="#scripts.node_a.get_user_input"><code class="docutils literal notranslate"><span class="pre">get_user_input()</span></code></a></li>
 <li><a class="reference internal" href="#scripts.node_a.handle_goal_commands"><code class="docutils literal notranslate"><span class="pre">handle_goal_commands()</span></code></a></li>
 <li><a class="reference internal" href="#scripts.node_a.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li><a class="reference internal" href="#scripts.node_a.publish_position_and_velocity"><code class="docutils literal notranslate"><span class="pre">publish_position_and_velocity()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -107,15 +119,95 @@
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 <section id="node-a">
-<h2>node_a!<a class="headerlink" href="#node-a" title="Permalink to this heading"></a></h2>
-<p>This is the documentation of the rt_assingnemnt2 package!
-rt_assignmrnt2 Module
-===========================</p>
+<h2>node_a<a class="headerlink" href="#node-a" title="Permalink to this heading"></a></h2>
+<p>his code implements node_a which handles goal setting and cancellation for a robot using ROS (Robot Operating System).</p>
+<section id="subscribers">
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>/odom: Subscribes to the odometry information.</p></li>
+</ul>
+</section>
+<section id="publishers">
+<h3>Publishers<a class="headerlink" href="#publishers" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>/pos_vel: Publishes the current position and velocity information.</p></li>
+</ul>
+</section>
+<section id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>/reaching_goal: Sends goals to the action server to reach a specified position.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="publish-position-and-velocity">
+<h4>publish_position_and_velocity<a class="headerlink" href="#publish-position-and-velocity" title="Permalink to this heading"></a></h4>
+<p>Publishes the current position and velocity information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param msg<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Odometry message containing position and velocity information.</p>
+</dd>
+<dt class="field-even">type msg<span class="colon">:</span></dt>
+<dd class="field-even"><p>nav_msgs.msg.Odometry</p>
+</dd>
+<dt class="field-odd">param pos_vel_publisher<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Publisher for position and velocity information.</p>
+</dd>
+<dt class="field-even">type pos_vel_publisher<span class="colon">:</span></dt>
+<dd class="field-even"><p>rospy.Publisher</p>
+</dd>
+</dl>
+</section>
+<section id="get-user-input">
+<h4>get_user_input<a class="headerlink" href="#get-user-input" title="Permalink to this heading"></a></h4>
+<p>Retrieves user input with a prompt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param prompt<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Prompt to display to the user.</p>
+</dd>
+<dt class="field-even">type prompt<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User input</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</section>
+<section id="get-new-goal">
+<h4>get_new_goal<a class="headerlink" href="#get-new-goal" title="Permalink to this heading"></a></h4>
+<p>Retrieves a new goal from user input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>New goal and its coordinates</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple(assignment_2_2023.msg.PlanningGoal, tuple(float, float))</p>
+</dd>
+</dl>
+</section>
+<section id="handle-goal-commands">
+<h4>handle_goal_commands<a class="headerlink" href="#handle-goal-commands" title="Permalink to this heading"></a></h4>
+<p>Handles goal commands from the user.</p>
+</section>
+<section id="main">
+<h4>main<a class="headerlink" href="#main" title="Permalink to this heading"></a></h4>
+<p>Main function to run the goal handler.</p>
+<hr class="docutils" />
 <span class="target" id="module-scripts.node_a"></span><span class="target" id="module-rt_assignment2"></span><p><em>Module author: Mohsen Kashefi</em></p>
-<p>This code implements a the node_a.</p>
+<p>This code implements node_a which handles goal setting and cancellation for a robot using ROS (Robot Operating System).</p>
 <dl class="simple">
-<dt>Subscriber:</dt><dd><ul class="simple">
-<li><p>/node_a/pose: Subscribes to the pose.</p></li>
+<dt>Subscribers:</dt><dd><ul class="simple">
+<li><p>/odom: Subscribes to the odometry information.</p></li>
+</ul>
+</dd>
+<dt>Publishers:</dt><dd><ul class="simple">
+<li><p>/pos_vel: Publishes the current position and velocity information.</p></li>
+</ul>
+</dd>
+<dt>Actions:</dt><dd><ul class="simple">
+<li><p>/reaching_goal: Sends goals to the action server to reach a specified position.</p></li>
 </ul>
 </dd>
 </dl>
@@ -178,9 +270,31 @@ rt_assignmrnt2 Module
 
 </section>
 </section>
+</section>
+</section>
 <section id="node-b">
 <span id="scripts-node-b"></span><h1>node_b<a class="headerlink" href="#node-b" title="Permalink to this heading"></a></h1>
-<p>This package contains a Python script for providing a service to retrieve the last desired x and y positions.</p>
+<p>This code implements Node B.</p>
+<ul class="simple">
+<li><p>/node_b/pose: Subscribes to the pose topic.</p></li>
+</ul>
+<ul class="simple">
+<li><p>/input: Provides the last desired x and y positions.</p></li>
+</ul>
+<p>Callback function for the ‘input’ service.</p>
+<p>Retrieves the last desired x and y positions from ROS parameters and constructs a response message containing these positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param request<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Request message sent to the service.</p>
+</dd>
+<dt class="field-even">return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response message containing the last desired x and y positions.</p>
+</dd>
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>assignment_2_2023.srv.InputResponse</p>
+</dd>
+</dl>
+<p>Initializes the ‘input’ service and keeps the node running to provide the service.</p>
 <span class="target" id="module-scripts.node_b"></span><span class="target" id="module-0"></span><span class="target" id="module-node_b"></span><p><em>Module author: Mohsen Kashefi</em></p>
 <p>This code implements Node B.</p>
 <dl class="simple">
@@ -217,7 +331,37 @@ constructs a response message containing these positions.</p>
 </section>
 <section id="node-c">
 <span id="scripts-node-c"></span><h1>node_c<a class="headerlink" href="#node-c" title="Permalink to this heading"></a></h1>
-<p>This package contains a Python script for the info_service node..</p>
+<ul class="simple">
+<li><p>/pos_vel: Subscribes to the position and velocity information.</p></li>
+</ul>
+<ul class="simple">
+<li><p>info_service: Provides information about distance and average velocity.</p></li>
+</ul>
+<p>Callback function to compute distance and average velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param msg<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Velocity message containing position and velocity information.</p>
+</dd>
+<dt class="field-even">type msg<span class="colon">:</span></dt>
+<dd class="field-even"><p>assignment_2_2023.msg.Vel</p>
+</dd>
+</dl>
+<p>Service handler function to provide distance and average velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param _<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Empty request, as no input is required.</p>
+</dd>
+<dt class="field-even">type _<span class="colon">:</span></dt>
+<dd class="field-even"><p>No input type.</p>
+</dd>
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response containing distance and average velocity.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>assignment_2_2023.srv.Ave_pos_velResponse</p>
+</dd>
+</dl>
+<p>Main function to initialize the ROS node and set up subscribers and services.</p>
 <span class="target" id="module-scripts.node_c"></span><span class="target" id="module-1"></span><span class="target" id="module-info_service_node"></span><p><em>Module author: Mohsen Kashefi</em></p>
 <p>This code implements the info_service node.</p>
 <dl class="simple">
