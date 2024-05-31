@@ -1,60 +1,219 @@
 <!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to rt_assignment2’s documentation! &mdash; rt_assignment2 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
 
-    <title>Welcome to rt_assignment2’s documentation! &#8212; rt_assignment2 1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=0868e8a2" />
-    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=404a92a0"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=404a92a0"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+          
+          
+          <a href="#" class="icon icon-home">
+            rt_assignment2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to rt_assignment2’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a><ul>
+<li><a class="reference internal" href="#node-a">node_a</a><ul>
+<li><a class="reference internal" href="#subscribers">Subscribers</a></li>
+<li><a class="reference internal" href="#publishers">Publishers</a></li>
+<li><a class="reference internal" href="#actions">Actions</a><ul>
+<li><a class="reference internal" href="#publish-position-and-velocity">publish_position_and_velocity</a></li>
+<li><a class="reference internal" href="#get-user-input">get_user_input</a></li>
+<li><a class="reference internal" href="#get-new-goal">get_new_goal</a></li>
+<li><a class="reference internal" href="#handle-goal-commands">handle_goal_commands</a></li>
+<li><a class="reference internal" href="#main">main</a><ul>
+<li><a class="reference internal" href="#scripts.node_a.get_new_goal"><code class="docutils literal notranslate"><span class="pre">get_new_goal()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.node_a.get_user_input"><code class="docutils literal notranslate"><span class="pre">get_user_input()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.node_a.handle_goal_commands"><code class="docutils literal notranslate"><span class="pre">handle_goal_commands()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.node_a.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.node_a.publish_position_and_velocity"><code class="docutils literal notranslate"><span class="pre">publish_position_and_velocity()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#node-b">node_b</a><ul>
+<li><a class="reference internal" href="#scripts.node_b.handle_input_request"><code class="docutils literal notranslate"><span class="pre">handle_input_request()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.node_b.provide_input_service"><code class="docutils literal notranslate"><span class="pre">provide_input_service()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#node-c">node_c</a><ul>
+<li><a class="reference internal" href="#scripts.node_c.get_distance_and_average_velocity"><code class="docutils literal notranslate"><span class="pre">get_distance_and_average_velocity()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.node_c.get_values"><code class="docutils literal notranslate"><span class="pre">get_values()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.node_c.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">rt_assignment2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to rt_assignment2’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="welcome-to-rt-assignment2-s-documentation">
-<h1>Welcome to rt_assignment2’s documentation!<a class="headerlink" href="#welcome-to-rt-assignment2-s-documentation" title="Permalink to this heading">¶</a></h1>
+<h1>Welcome to rt_assignment2’s documentation!<a class="headerlink" href="#welcome-to-rt-assignment2-s-documentation" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
 </section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 <section id="node-a">
-<h2>node_a!<a class="headerlink" href="#node-a" title="Permalink to this heading">¶</a></h2>
-<p>This is the documentation of the rt_assingnemnt2 package!
-rt_assignmrnt2 Module
-===========================</p>
+<h2>node_a<a class="headerlink" href="#node-a" title="Permalink to this heading"></a></h2>
+<p>his code implements node_a which handles goal setting and cancellation for a robot using ROS (Robot Operating System).</p>
+<section id="subscribers">
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>/odom: Subscribes to the odometry information.</p></li>
+</ul>
+</section>
+<section id="publishers">
+<h3>Publishers<a class="headerlink" href="#publishers" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>/pos_vel: Publishes the current position and velocity information.</p></li>
+</ul>
+</section>
+<section id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>/reaching_goal: Sends goals to the action server to reach a specified position.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="publish-position-and-velocity">
+<h4>publish_position_and_velocity<a class="headerlink" href="#publish-position-and-velocity" title="Permalink to this heading"></a></h4>
+<p>Publishes the current position and velocity information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param msg<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Odometry message containing position and velocity information.</p>
+</dd>
+<dt class="field-even">type msg<span class="colon">:</span></dt>
+<dd class="field-even"><p>nav_msgs.msg.Odometry</p>
+</dd>
+<dt class="field-odd">param pos_vel_publisher<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Publisher for position and velocity information.</p>
+</dd>
+<dt class="field-even">type pos_vel_publisher<span class="colon">:</span></dt>
+<dd class="field-even"><p>rospy.Publisher</p>
+</dd>
+</dl>
+</section>
+<section id="get-user-input">
+<h4>get_user_input<a class="headerlink" href="#get-user-input" title="Permalink to this heading"></a></h4>
+<p>Retrieves user input with a prompt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param prompt<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Prompt to display to the user.</p>
+</dd>
+<dt class="field-even">type prompt<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User input</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</section>
+<section id="get-new-goal">
+<h4>get_new_goal<a class="headerlink" href="#get-new-goal" title="Permalink to this heading"></a></h4>
+<p>Retrieves a new goal from user input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>New goal and its coordinates</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple(assignment_2_2023.msg.PlanningGoal, tuple(float, float))</p>
+</dd>
+</dl>
+</section>
+<section id="handle-goal-commands">
+<h4>handle_goal_commands<a class="headerlink" href="#handle-goal-commands" title="Permalink to this heading"></a></h4>
+<p>Handles goal commands from the user.</p>
+</section>
+<section id="main">
+<h4>main<a class="headerlink" href="#main" title="Permalink to this heading"></a></h4>
+<p>Main function to run the goal handler.</p>
+<hr class="docutils" />
 <span class="target" id="module-scripts.node_a"></span><span class="target" id="module-rt_assignment2"></span><p><em>Module author: Mohsen Kashefi</em></p>
-<p>This code implements a the node_a.</p>
+<p>This code implements node_a which handles goal setting and cancellation for a robot using ROS (Robot Operating System).</p>
 <dl class="simple">
-<dt>Subscriber:</dt><dd><ul class="simple">
-<li><p>/node_a/pose: Subscribes to the pose.</p></li>
+<dt>Subscribers:</dt><dd><ul class="simple">
+<li><p>/odom: Subscribes to the odometry information.</p></li>
+</ul>
+</dd>
+<dt>Publishers:</dt><dd><ul class="simple">
+<li><p>/pos_vel: Publishes the current position and velocity information.</p></li>
+</ul>
+</dd>
+<dt>Actions:</dt><dd><ul class="simple">
+<li><p>/reaching_goal: Sends goals to the action server to reach a specified position.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_a.get_new_goal">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">get_new_goal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#get_new_goal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.get_new_goal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">get_new_goal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#get_new_goal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.get_new_goal" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieves a new goal from user input.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -68,7 +227,7 @@ rt_assignmrnt2 Module
 
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_a.get_user_input">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">get_user_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#get_user_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.get_user_input" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">get_user_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#get_user_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.get_user_input" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieves user input with a prompt.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -85,19 +244,19 @@ rt_assignmrnt2 Module
 
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_a.handle_goal_commands">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">handle_goal_commands</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#handle_goal_commands"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.handle_goal_commands" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">handle_goal_commands</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#handle_goal_commands"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.handle_goal_commands" title="Permalink to this definition"></a></dt>
 <dd><p>Handles goal commands from the user.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_a.main">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.main" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.main" title="Permalink to this definition"></a></dt>
 <dd><p>Main function to run the goal handler.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_a.publish_position_and_velocity">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">publish_position_and_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_vel_publisher</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#publish_position_and_velocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.publish_position_and_velocity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_a.</span></span><span class="sig-name descname"><span class="pre">publish_position_and_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_vel_publisher</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_a.html#publish_position_and_velocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_a.publish_position_and_velocity" title="Permalink to this definition"></a></dt>
 <dd><p>Publishes the current position and velocity information.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -111,9 +270,31 @@ rt_assignmrnt2 Module
 
 </section>
 </section>
+</section>
+</section>
 <section id="node-b">
-<span id="scripts-node-b"></span><h1>node_b<a class="headerlink" href="#node-b" title="Permalink to this heading">¶</a></h1>
-<p>This package contains a Python script for providing a service to retrieve the last desired x and y positions.</p>
+<span id="scripts-node-b"></span><h1>node_b<a class="headerlink" href="#node-b" title="Permalink to this heading"></a></h1>
+<p>This code implements Node B.</p>
+<ul class="simple">
+<li><p>/node_b/pose: Subscribes to the pose topic.</p></li>
+</ul>
+<ul class="simple">
+<li><p>/input: Provides the last desired x and y positions.</p></li>
+</ul>
+<p>Callback function for the ‘input’ service.</p>
+<p>Retrieves the last desired x and y positions from ROS parameters and constructs a response message containing these positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param request<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Request message sent to the service.</p>
+</dd>
+<dt class="field-even">return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response message containing the last desired x and y positions.</p>
+</dd>
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>assignment_2_2023.srv.InputResponse</p>
+</dd>
+</dl>
+<p>Initializes the ‘input’ service and keeps the node running to provide the service.</p>
 <span class="target" id="module-scripts.node_b"></span><span class="target" id="module-0"></span><span class="target" id="module-node_b"></span><p><em>Module author: Mohsen Kashefi</em></p>
 <p>This code implements Node B.</p>
 <dl class="simple">
@@ -124,7 +305,7 @@ rt_assignmrnt2 Module
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_b.handle_input_request">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_b.</span></span><span class="sig-name descname"><span class="pre">handle_input_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_b.html#handle_input_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_b.handle_input_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_b.</span></span><span class="sig-name descname"><span class="pre">handle_input_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_b.html#handle_input_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_b.handle_input_request" title="Permalink to this definition"></a></dt>
 <dd><p>Callback function for the ‘input’ service.</p>
 <p>Retrieves the last desired x and y positions from ROS parameters and
 constructs a response message containing these positions.</p>
@@ -143,14 +324,44 @@ constructs a response message containing these positions.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_b.provide_input_service">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_b.</span></span><span class="sig-name descname"><span class="pre">provide_input_service</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_b.html#provide_input_service"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_b.provide_input_service" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_b.</span></span><span class="sig-name descname"><span class="pre">provide_input_service</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_b.html#provide_input_service"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_b.provide_input_service" title="Permalink to this definition"></a></dt>
 <dd><p>Initializes the ‘input’ service and keeps the node running to provide the service.</p>
 </dd></dl>
 
 </section>
 <section id="node-c">
-<span id="scripts-node-c"></span><h1>node_c<a class="headerlink" href="#node-c" title="Permalink to this heading">¶</a></h1>
-<p>This package contains a Python script for the info_service node..</p>
+<span id="scripts-node-c"></span><h1>node_c<a class="headerlink" href="#node-c" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>/pos_vel: Subscribes to the position and velocity information.</p></li>
+</ul>
+<ul class="simple">
+<li><p>info_service: Provides information about distance and average velocity.</p></li>
+</ul>
+<p>Callback function to compute distance and average velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param msg<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Velocity message containing position and velocity information.</p>
+</dd>
+<dt class="field-even">type msg<span class="colon">:</span></dt>
+<dd class="field-even"><p>assignment_2_2023.msg.Vel</p>
+</dd>
+</dl>
+<p>Service handler function to provide distance and average velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param _<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Empty request, as no input is required.</p>
+</dd>
+<dt class="field-even">type _<span class="colon">:</span></dt>
+<dd class="field-even"><p>No input type.</p>
+</dd>
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response containing distance and average velocity.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>assignment_2_2023.srv.Ave_pos_velResponse</p>
+</dd>
+</dl>
+<p>Main function to initialize the ROS node and set up subscribers and services.</p>
 <span class="target" id="module-scripts.node_c"></span><span class="target" id="module-1"></span><span class="target" id="module-info_service_node"></span><p><em>Module author: Mohsen Kashefi</em></p>
 <p>This code implements the info_service node.</p>
 <dl class="simple">
@@ -165,7 +376,7 @@ constructs a response message containing these positions.</p>
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_c.get_distance_and_average_velocity">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_c.</span></span><span class="sig-name descname"><span class="pre">get_distance_and_average_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_c.html#get_distance_and_average_velocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_c.get_distance_and_average_velocity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_c.</span></span><span class="sig-name descname"><span class="pre">get_distance_and_average_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_c.html#get_distance_and_average_velocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_c.get_distance_and_average_velocity" title="Permalink to this definition"></a></dt>
 <dd><p>Callback function to compute distance and average velocity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -176,7 +387,7 @@ constructs a response message containing these positions.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_c.get_values">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_c.</span></span><span class="sig-name descname"><span class="pre">get_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_c.html#get_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_c.get_values" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_c.</span></span><span class="sig-name descname"><span class="pre">get_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_c.html#get_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_c.get_values" title="Permalink to this definition"></a></dt>
 <dd><p>Service handler function to provide distance and average velocity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -193,64 +404,38 @@ constructs a response message containing these positions.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.node_c.main">
-<span class="sig-prename descclassname"><span class="pre">scripts.node_c.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_c.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_c.main" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scripts.node_c.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/node_c.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.node_c.main" title="Permalink to this definition"></a></dt>
 <dd><p>Main function to initialize the ROS node and set up subscribers and services.</p>
 </dd></dl>
 
 </section>
 
 
+           </div>
           </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mohsen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">rt_assignment2</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2024, Mohsen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
-      
-      |
-      <a href="_sources/index.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
